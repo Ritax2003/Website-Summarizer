@@ -1,0 +1,21 @@
+# Use Node.js as a base image
+FROM node:16-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the React app for production
+RUN npm run build
+
+# Expose the port React app will run on
+EXPOSE 3000
+
+# Serve the React app using a static server
+CMD ["npx", "serve", "-s", "build"]

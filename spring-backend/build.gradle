@@ -1,0 +1,55 @@
+plugins {
+	id 'java'
+	id 'scala'
+	id 'application'
+	id 'org.springframework.boot' version '3.3.10'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.RitabrataProject'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.scala-lang:scala-library:2.13.16'
+	implementation 'org.jsoup:jsoup:1.17.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'com.softwaremill.sttp.client3:core_2.13:3.3.15'
+
+
+}
+// Properly configure Scala sources and resources
+sourceSets {
+	main {
+		java {
+			srcDirs = [] // Java source code location
+		}
+		scala {
+			srcDirs = ['src/main/scala', 'src/main/java'] // Scala source code location
+		}
+		resources {
+			srcDirs = ['src/main/resources'] // Resources location (e.g., application.properties)
+		}
+	}
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
